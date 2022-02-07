@@ -35,7 +35,7 @@ if (isset($_POST['frm'])) {
     if (count($erreur) === 0) {
         $serverName = "localhost";
         $userName = "root";
-        $database = "exercice";
+        $database = "formulaire";
         $userPassword = "";
 
         try{

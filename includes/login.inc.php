@@ -1,3 +1,4 @@
+<h1>Login</h1>
 <?php
 if (isset($_POST['envoi'])) {
     $mail = htmlentities(trim($_POST['mail'])) ?? '';
@@ -14,7 +15,7 @@ if (isset($_POST['envoi'])) {
     if (count($erreur) === 0) {
         $serverName = "localhost";
         $userName = "root";
-        $database = "exercice";
+        $database = "formulaire";
         $userPassword = "";
 
         try{
@@ -36,10 +37,12 @@ if (isset($_POST['envoi'])) {
                 $mdpRequete = $resultat[0]->mdp;
                 if(password_verify($mdp, $mdpRequete)) {
                     if(!isset($_SESSION['login']))
-                        $_SESSION['login'] =true;
-                            echo "<script>
-                                    document.location.replace('http://localhost/GameLib/');
-                                    </script>";
+                        $_SESSION['login'] = true;
+                        $_SESSION['nom'] = $resultat[0]->nom;
+                        $_SESSION['prenom'] = $resultat[0]->prenom;
+                        echo "<script>
+                        document.location.replace('http://localhost/GameLib/');
+                        </script>";
                 }
                 else {
                     echo "Bien tenté, mais non";
@@ -67,7 +70,7 @@ if (isset($_POST['envoi'])) {
         echo $messageErreur;
     }
 } else {
-    echo "Merci de renseigner le formulaire";
+    echo "<h2>Merci de renseigner le formulaire&nbsp;:</h2>";
     $mail = $mdp = '';
 }
 
